@@ -1,8 +1,11 @@
 { config, pkgs, ... }:
 
 {
+  
   home.username = "nikola";
   home.homeDirectory = "/home/nikola";
+  home.stateVersion = "23.05";
+  programs.home-manager.enable = true;
 
   # basic configuration of git, please change to your own
   programs.git = {
@@ -13,19 +16,19 @@
 
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
-  
+    firefox
+    kate
+    _1password-gui
+    discord
+    telegram-desktop
+    vscode
+    sublime4
+    gh
+    libsForQt5.yakuake
+    libsForQt5.filelight
+    partition-manager
+    coq
+    coqPackages.coqide
   ];
 
-  # This value determines the home Manager release that your
-  # configuration is compatible with. This helps avoid breakage
-  # when a new home Manager release introduces backwards
-  # incompatible changes.
-  #
-  # You can update home Manager without changing this value. See
-  # the home Manager release notes for a list of state version
-  # changes in each release.
-  home.stateVersion = "23.05";
-
-  # Let home Manager install and manage itself.
-  programs.home-manager.enable = true;
 }

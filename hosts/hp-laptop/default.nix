@@ -17,8 +17,11 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   # boot.loader.grub.enable = true;
-  boot.loader.grub.device = "nodev";
-  boot.loader.grub.useOSProber = true;
+  boot.loader.grub.devices = [
+    /dev/nvme1n1p5
+    /dev/nvme0n1p9
+  ];
+  boot.loader.grub.useOSProber = false;
   
   networking.hostName = "nikola-hp-nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.

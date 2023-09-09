@@ -16,5 +16,7 @@
     os-prober
     file
     git
+    fd
+    bat
   ];
 }
