@@ -26,6 +26,7 @@
     gh
     libsForQt5.yakuake
     libsForQt5.filelight
+    libsForQt5.qt5.qttools
     partition-manager
     coq
     coqPackages.coqide

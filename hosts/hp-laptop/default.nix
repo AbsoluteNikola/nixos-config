@@ -21,8 +21,10 @@
   boot.loader.grub.device = "nodev";
   boot.loader.grub.useOSProber = true;
   boot.loader.grub.fontSize = 48;
+  boot.supportedFilesystems = [ "ntfs" ];
   
   networking.hostName = "nikola-hp-nixos"; # Define your hostname.
+  networking.nameservers = ["1.1.1.1" "8.8.8.8"];
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Enable networking
@@ -57,6 +59,8 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  hardware.bluetooth.enable = true;
+  
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;

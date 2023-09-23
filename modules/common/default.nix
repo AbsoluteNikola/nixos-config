@@ -18,5 +18,8 @@
     git
     fd
     bat
+    wineWowPackages.full
+    qbittorrent
+    isoimagewriter
   ];
 }
