@@ -11,7 +11,6 @@
       ../../modules/common
     ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Bootloader.
   # boot.loader.systemd-boot.enable = true;
@@ -23,8 +22,10 @@
   boot.loader.grub.fontSize = 48;
   boot.supportedFilesystems = [ "ntfs" ];
   
+  boot.kernelModules = [ "i2c-dev" " i2c-i801" ];
+  
   networking.hostName = "nikola-hp-nixos"; # Define your hostname.
-  networking.nameservers = ["1.1.1.1" "8.8.8.8"];
+  # networking.nameservers = ["1.1.1.1" "8.8.8.8"];
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Enable networking
@@ -55,6 +56,51 @@
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
 
+  # Load nvidia driver for Xorg and Wayland
+  services.xserver.videoDrivers = ["nvidia"];
+
+  # Enable OpenGL
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+  };
+
+  hardware.nvidia = {
+
+    # Modesetting is required.
+    modesetting.enable = true;
+
+    # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
+    powerManagement.enable = false;
+    # Fine-grained power management. Turns off GPU when not in use.
+    # Experimental and only works on modern Nvidia GPUs (Turing or newer).
+    powerManagement.finegrained = true;
+    prime = {
+      offload = {
+          enable = true;
+          enableOffloadCmd = true;
+      };
+      # Make sure to use the correct Bus ID values for your system!
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:1:0:0";
+    };
+    # Use the NVidia open source kernel module (not to be confused with the
+    # independent third-party "nouveau" open source driver).
+    # Support is limited to the Turing and later architectures. Full list of 
+    # supported GPUs is at: 
+    # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus 
+    # Only available from driver 515.43.04+
+    # Do not disable this unless your GPU is unsupported or if you have a good reason to.
+    open = true;
+
+    # Enable the Nvidia settings menu,
+    # accessible via `nvidia-settings`.
+    nvidiaSettings = true;
+
+    # Optionally, you may need to select the appropriate driver version for your specific GPU.
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -88,6 +134,7 @@
     extraGroups = [ "networkmanager" "wheel" ];
   };
   
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
@@ -95,5 +142,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
-
 }
