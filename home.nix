@@ -13,7 +13,7 @@
     userName = "Nikolay Rulev";
     userEmail = "nikolayr2001@gmail.com";
   };
-
+  
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
     firefox
@@ -27,7 +27,6 @@
     libsForQt5.yakuake
     libsForQt5.filelight
     libsForQt5.qt5.qttools
-    partition-manager
     coq
     coqPackages.coqide
   ];
