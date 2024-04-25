@@ -29,6 +29,8 @@
     libsForQt5.qt5.qttools
     coq
     coqPackages.coqide
+    nuXmv
+    spin
   ];
 
 }

@@ -29,8 +29,10 @@
     file
     git
     fd
+    coreutils-full
     bat
     wineWowPackages.full
+    winetricks
     qbittorrent
     isoimagewriter
     dig
@@ -59,5 +61,17 @@
     jdk17
     zoom-us
     swiProlog
+    gmp 
+    gnumake 
+    ncurses 
+    xz
+    libredwg
+    binwalk
+    jq
+    python311
+    enca
+    xclip
+    gst_all_1.gstreamer
+    ffmpeg_5-full
   ];
 }
